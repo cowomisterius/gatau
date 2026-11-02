@@ -26,7 +26,7 @@ export function ModelSelector({ value, onChange, labels }: Props) {
   if (error) {
     return (
       <div className="text-xs text-destructive">
-        无法加载模型列表：{' '}
+        Tidak dapat memuat daftar model:{' '}
         {error instanceof ApiCallError ? error.message : String(error)}
       </div>
     )
@@ -37,7 +37,7 @@ export function ModelSelector({ value, onChange, labels }: Props) {
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger>
-        <SelectValue placeholder="选择模型…" />
+        <SelectValue placeholder="Pilih model…" />
       </SelectTrigger>
       <SelectContent>
         {models.map((m) => (

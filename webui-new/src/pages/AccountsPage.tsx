@@ -44,29 +44,29 @@ export default function AccountsPage() {
     if (!deleting) return
     try {
       await del(`/admin/api/accounts/${encodeURIComponent(deleting.id)}`)
-      toast({ title: '账号已删除', variant: 'success' })
+      toast({ title: 'Akun berhasil dihapus', variant: 'success' })
       setDeleting(null)
       refresh()
     } catch (e) {
       const msg = e instanceof ApiCallError ? e.message : String(e)
-      toast({ title: '删除失败', description: msg, variant: 'destructive' })
+      toast({ title: 'Gagal menghapus', description: msg, variant: 'destructive' })
     }
   }
 
   return (
     <div className="space-y-6 animate-fade-in">
       <PageHeader
-        title="账号池"
-        description={`管理 DeepSeek 账号 · 共 ${data?.total ?? '—'} 个`}
+        title="Kumpulan akun"
+        description={`Kelola akun DeepSeek · Total ${data?.total ?? '—'} akun`}
         actions={
           <>
             <Button variant="outline" onClick={refresh} disabled={loading}>
               <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-              刷新
+              Segarkan
             </Button>
             <Button onClick={() => setAddOpen(true)}>
               <Plus className="h-4 w-4" />
-              添加账号
+              Tambah akun
             </Button>
           </>
         }
@@ -82,14 +82,14 @@ export default function AccountsPage() {
             </div>
           ) : error ? (
             <div className="p-8 text-center text-sm text-destructive">
-              加载失败：{error.message}
+              Gagal memuat: {error.message}
             </div>
           ) : accounts.length === 0 ? (
             <div className="p-12 text-center">
               <Users className="mx-auto h-10 w-10 text-muted-foreground/40" />
-              <h3 className="mt-3 text-sm font-medium">暂无账号</h3>
+              <h3 className="mt-3 text-sm font-medium">Belum ada akun</h3>
               <p className="mt-1 text-xs text-muted-foreground">
-                点击右上角“添加账号”，也可以将账号写入 data/accounts.json。
+                Klik "Tambah akun" di kanan atas, atau tulis akun ke data/accounts.json.
               </p>
             </div>
           ) : (
@@ -107,8 +107,8 @@ export default function AccountsPage() {
       <Dialog open={addOpen} onOpenChange={setAddOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>添加账号</DialogTitle>
-            <DialogDescription>输入 DeepSeek 账号的 Token 与 Cookies 即可使用</DialogDescription>
+            <DialogTitle>Tambah akun</DialogTitle>
+            <DialogDescription>Masukkan Token dan Cookies akun DeepSeek untuk mulai menggunakannya</DialogDescription>
           </DialogHeader>
           <AccountForm
             onSaved={() => {
@@ -124,9 +124,9 @@ export default function AccountsPage() {
       <Dialog open={!!editing} onOpenChange={(o) => !o && setEditing(null)}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>编辑账号</DialogTitle>
+            <DialogTitle>Edit akun</DialogTitle>
             <DialogDescription>
-              留空 Token / Cookies 表示不修改对应字段
+              Kosongkan Token / Cookies untuk mempertahankan nilai masing-masing
             </DialogDescription>
           </DialogHeader>
           {editing && (
@@ -146,16 +146,16 @@ export default function AccountsPage() {
       <AlertDialog open={!!deleting} onOpenChange={(o) => !o && setDeleting(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>删除账号？</AlertDialogTitle>
+            <AlertDialogTitle>Hapus akun?</AlertDialogTitle>
             <AlertDialogDescription>
-              将删除账号 <code className="font-mono text-xs">{deleting?.id}</code>。
-              此操作不可撤销。
+              Akun <code className="font-mono text-xs">{deleting?.id}</code> akan dihapus.
+              Tindakan ini tidak dapat dibatalkan.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogCancel>Batal</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              确认删除
+              Konfirmasi penghapusan
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

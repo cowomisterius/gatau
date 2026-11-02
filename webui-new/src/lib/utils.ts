@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-/** Format a duration in seconds as "X天 Y时 Z分" (Chinese-style). */
+/** Format durasi dalam detik sebagai "X hari Y jam Z menit". */
 export function formatUptime(seconds: number | null | undefined): string {
   if (!seconds || seconds < 0) return '-'
   const d = Math.floor(seconds / 86400)
@@ -13,10 +13,10 @@ export function formatUptime(seconds: number | null | undefined): string {
   const m = Math.floor((seconds % 3600) / 60)
   const s = Math.floor(seconds % 60)
   let r = ''
-  if (d > 0) r += `${d}天 `
-  if (h > 0) r += `${h}时 `
-  if (d === 0 && h === 0) r += `${m}分`
-  return r.trim() || `${s}秒`
+  if (d > 0) r += `${d} hari `
+  if (h > 0) r += `${h} jam `
+  if (d === 0 && h === 0) r += `${m} menit`
+  return r.trim() || `${s} detik`
 }
 
 /** Format a millisecond latency: < 1s → "NNNms", else "N.NNs". */
@@ -38,13 +38,13 @@ export function formatPercent(rate: number | null | undefined): string {
   return `${(rate * 100).toFixed(1)}%`
 }
 
-/** Map backend account.state to a display label (Chinese). */
+/** Petakan account.state dari backend ke label tampilan. */
 export function stateLabel(state: string): string {
   return (
     {
-      idle: '空闲',
-      busy: '繁忙',
-      error: '异常',
+      idle: 'Siaga',
+      busy: 'Sibuk',
+      error: 'Bermasalah',
     } as Record<string, string>
   )[state] ?? state
 }

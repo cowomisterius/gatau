@@ -6,8 +6,8 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6 animate-fade-in">
       <PageHeader
-        title="设置"
-        description="管理客户端 API Key，并查看当前运行时配置"
+        title="Pengaturan"
+        description="Kelola API Key klien dan lihat konfigurasi runtime saat ini"
       />
       <ApiKeyManager />
       <EnvPreview />

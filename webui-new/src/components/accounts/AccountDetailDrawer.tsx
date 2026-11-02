@@ -44,31 +44,31 @@ export function AccountDetailDrawer({ account, onClose, onRelogin }: Props) {
                 <span className="flex items-center gap-2">
                   <StateBadge state={account.state} />
                   <span className="text-xs text-muted-foreground">·</span>
-                  <span className="text-xs">持久化</span>
+                  <span className="text-xs">Persisten</span>
                 </span>
               </SheetDescription>
             </SheetHeader>
 
             <div className="mt-6 space-y-5">
               <section>
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">身份</h3>
+                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Identitas</h3>
                 <DetailRow label="ID" value={account.id} mono copyable />
-                <DetailRow label="标识" value={account.email || '—'} />
-                <DetailRow label="来源" value="data/accounts.json" />
-                <DetailRow label="状态" value={account.state} />
+                <DetailRow label="Identitas" value={account.email || '—'} />
+                <DetailRow label="Sumber" value="data/accounts.json" />
+                <DetailRow label="Status" value={account.state} />
               </section>
 
               <Separator />
 
               <section>
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">凭据</h3>
-                <DetailRow label="Token 预览" value={account.token_preview || '—'} mono copyable />
+                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Kredensial</h3>
+                <DetailRow label="Pratinjau Token" value={account.token_preview || '—'} mono copyable />
                 <DetailRow
-                  label="Cookies 预览"
+                  label="Pratinjau Cookies"
                   value={account.cookies_preview || '—'}
                 />
                 <DetailRow
-                  label="凭据指纹"
+                  label="Sidik jari kredensial"
                   value={account.credential_fingerprint || '—'}
                   mono
                   copyable
@@ -78,22 +78,22 @@ export function AccountDetailDrawer({ account, onClose, onRelogin }: Props) {
               <Separator />
 
               <section>
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">运行时</h3>
-                <DetailRow label="错误次数" value={String(account.error_count)} />
+                <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Runtime</h3>
+                <DetailRow label="Jumlah kesalahan" value={String(account.error_count)} />
                 <DetailRow
-                  label="最后使用"
+                  label="Terakhir digunakan"
                   value={
                     account.last_used > 0
-                      ? `${fmtTs(account.last_used)} (${formatUptime(Math.floor(Date.now() / 1000 - account.last_used))}前)`
+                      ? `${fmtTs(account.last_used)} (${formatUptime(Math.floor(Date.now() / 1000 - account.last_used))} yang lalu)`
                       : '—'
                   }
                 />
                 <DetailRow
-                  label="创建时间"
+                  label="Waktu dibuat"
                   value={account.created_at > 0 ? fmtTs(account.created_at) : '—'}
                 />
                 <DetailRow
-                  label="更新时间"
+                  label="Waktu diperbarui"
                   value={account.updated_at > 0 ? fmtTs(account.updated_at) : '—'}
                 />
               </section>
@@ -102,7 +102,7 @@ export function AccountDetailDrawer({ account, onClose, onRelogin }: Props) {
                 <>
                   <Separator />
                   <section>
-                    <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">最后错误</h3>
+                    <h3 className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Kesalahan terakhir</h3>
                     <pre className="rounded-md bg-destructive/5 border border-destructive/20 p-3 text-xs text-destructive whitespace-pre-wrap break-words font-mono">
                       {truncateMiddle(account.last_error, 240, 0)}
                     </pre>
@@ -148,11 +148,11 @@ function DetailRow({
             className="h-6 w-6 shrink-0"
             onClick={() => {
               navigator.clipboard.writeText(value).then(
-                () => toast({ title: '已复制', variant: 'success' }),
-                () => toast({ title: '复制失败', variant: 'destructive' }),
+                () => toast({ title: 'Berhasil disalin', variant: 'success' }),
+                () => toast({ title: 'Gagal menyalin', variant: 'destructive' }),
               )
             }}
-            aria-label="复制"
+            aria-label="Salin"
           >
             <Copy className="h-3 w-3" />
           </Button>

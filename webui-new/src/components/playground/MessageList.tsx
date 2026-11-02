@@ -29,7 +29,7 @@ function ReasoningBlock({ text }: { text: string }) {
   if (!text.trim()) return null
   return (
     <details className="mb-2 rounded-md bg-muted/60 p-2 text-xs text-muted-foreground">
-      <summary className="cursor-pointer select-none font-medium">推理过程</summary>
+      <summary className="cursor-pointer select-none font-medium">Proses penalaran</summary>
       <div className="mt-1.5 max-h-48 overflow-y-auto whitespace-pre-wrap break-words font-mono leading-relaxed">
         {text}
       </div>
@@ -48,8 +48,8 @@ export function MessageList({ messages, streaming }: Props) {
       <Card className="flex h-full items-center justify-center border-dashed">
         <CardContent className="text-center text-sm text-muted-foreground py-12">
           <Bot className="mx-auto h-8 w-8 mb-2 opacity-40 text-primary" />
-          <p>在左侧输入消息并点击"发送"</p>
-          <p className="mt-1 text-xs">客户端 API Key 可在设置页创建</p>
+          <p>Masukkan pesan di sebelah kiri lalu klik "Kirim"</p>
+          <p className="mt-1 text-xs">API Key klien dapat dibuat di halaman Pengaturan</p>
         </CardContent>
       </Card>
     )
@@ -77,7 +77,7 @@ export function MessageList({ messages, streaming }: Props) {
           >
             {m.role !== 'user' && m.reasoning && <ReasoningBlock text={m.reasoning} />}
             <div className="whitespace-pre-wrap break-words">
-              {m.content || <span className="text-muted-foreground italic">（空）</span>}
+              {m.content || <span className="text-muted-foreground italic">(kosong)</span>}
             </div>
           </div>
           {m.role === 'user' && (
@@ -96,7 +96,7 @@ export function MessageList({ messages, streaming }: Props) {
           <div className="max-w-[80%] rounded-lg border bg-card px-3 py-2 text-sm shadow-sm">
             {streaming.reasoning && (
               <div className="mb-2 rounded-md bg-muted/60 p-2 text-xs text-muted-foreground">
-                <div className="font-medium">推理过程</div>
+                <div className="font-medium">Proses penalaran</div>
                 <div className="mt-1 whitespace-pre-wrap break-words font-mono leading-relaxed">
                   {streaming.reasoning}
                 </div>

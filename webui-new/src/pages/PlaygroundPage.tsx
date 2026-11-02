@@ -41,8 +41,8 @@ interface ApiMessage {
  * decorate the two default names when they are present.
  */
 const MODEL_LABELS: Record<string, string> = {
-  'deepseek-chat': 'deepseek-chat（唯一模型）',
-  'deepseek-reasoner': 'deepseek-reasoner（deepseek-chat 的旧别名）',
+  'deepseek-chat': 'deepseek-chat (satu-satunya model)',
+  'deepseek-reasoner': 'deepseek-reasoner (alias lama untuk deepseek-chat)',
 }
 
 export default function PlaygroundPage() {
@@ -188,7 +188,7 @@ export default function PlaygroundPage() {
         }
       } else {
         const msg = e instanceof ApiCallError ? e.message : String(e)
-        toast({ title: '请求失败', description: msg, variant: 'destructive' })
+        toast({ title: 'Permintaan gagal', description: msg, variant: 'destructive' })
       }
       setStreaming(null)
     } finally {
@@ -211,7 +211,7 @@ export default function PlaygroundPage() {
     <div className="space-y-4 animate-fade-in h-full flex flex-col">
       <PageHeader
         title="Playground"
-        description="在线测试 /v1/chat/completions"
+        description="Uji online /v1/chat/completions"
         actions={
           <Button
             variant="outline"
@@ -219,7 +219,7 @@ export default function PlaygroundPage() {
             disabled={history.length === 0 || busy}
           >
             <Trash2 className="h-4 w-4" />
-            清空
+            Hapus semua
           </Button>
         }
       />
@@ -230,27 +230,27 @@ export default function PlaygroundPage() {
           <CardHeader className="pb-2">
             <CardTitle className="text-base flex items-center gap-2">
               <FlaskConical className="h-4 w-4" />
-              参数
+              Parameter
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-1.5">
-              <Label>模型</Label>
+              <Label>Model</Label>
               <ModelSelector value={model} onChange={setModel} labels={MODEL_LABELS} />
               <p className="text-[11px] text-muted-foreground">
-                只有一个模型；名字仅用于 <code className="font-mono">/v1/models</code>
-                与 <code className="font-mono">MODEL_ROUTES</code> 的预设匹配。是否思考由下面的开关（或服务端
-                <code className="font-mono"> THINKING</code>）决定
+                Hanya ada satu model; nama hanya digunakan untuk <code className="font-mono">/v1/models</code>
+                dan <code className="font-mono">MODEL_ROUTES</code> untuk mencocokkan preset. Mode berpikir ditentukan oleh sakelar di bawah (atau sisi server
+                <code className="font-mono"> THINKING</code>)
               </p>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="system">System 提示</Label>
+              <Label htmlFor="system">Prompt sistem</Label>
               <textarea
                 id="system"
                 value={systemPrompt}
                 onChange={(e) => setSystemPrompt(e.target.value)}
-                placeholder="可选，例如 'You are a helpful assistant.'"
+                placeholder="Opsional, misalnya 'You are a helpful assistant.'"
                 className="flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                 rows={3}
               />
@@ -258,10 +258,10 @@ export default function PlaygroundPage() {
 
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="thinking">思考模式</Label>
+                <Label htmlFor="thinking">Mode berpikir</Label>
                 <p className="text-[11px] text-muted-foreground">
-                  对应 DeepSeek <code className="font-mono">thinking_enabled</code>
-                  ，即原「专家模式」
+                  Sesuai dengan DeepSeek <code className="font-mono">thinking_enabled</code>
+                  ; sebelumnya disebut "mode ahli"
                 </p>
               </div>
               <Switch
@@ -273,9 +273,9 @@ export default function PlaygroundPage() {
 
             <div className="flex items-center justify-between">
               <div>
-                <Label htmlFor="search">联网搜索</Label>
+                <Label htmlFor="search">Pencarian web</Label>
                 <p className="text-[11px] text-muted-foreground">
-                  对应 DeepSeek <code className="font-mono">search_enabled</code>
+                  Sesuai dengan DeepSeek <code className="font-mono">search_enabled</code>
                 </p>
               </div>
               <Switch id="search" checked={search} onCheckedChange={setSearch} />
@@ -284,13 +284,13 @@ export default function PlaygroundPage() {
             <div className="rounded-md border border-dashed p-3 text-[11px] leading-relaxed text-muted-foreground space-y-1">
               <p className="flex items-center gap-1 font-medium text-foreground/80">
                 <Info className="h-3.5 w-3.5" />
-                参数生效规则
+                Aturan penerapan parameter
               </p>
-              <p>· 服务端 .env 的 THINKING / SEARCH 优先级高于此处设置</p>
-              <p>· 只有一个模型，思考与否不靠换模型名，而是这个开关 + THINKING</p>
-              <p>· THINKING/SEARCH 为 enabled/disabled 时强制开关</p>
-              <p>· 旧的 MODE=expert / MODE=quick 仍兼容，等价于 THINKING=enabled / disabled</p>
-              <p>· temperature / top_p / max_tokens 后端暂不生效，未提供</p>
+              <p>· THINKING / SEARCH di .env sisi server memiliki prioritas lebih tinggi daripada pengaturan ini</p>
+              <p>· Hanya ada satu model; mode berpikir ditentukan oleh sakelar ini + THINKING, bukan dengan mengganti nama model</p>
+              <p>· THINKING/SEARCH memaksa mode aktif/nonaktif saat nilainya enabled/disabled</p>
+              <p>· MODE=expert / MODE=quick lama masih kompatibel dan setara dengan THINKING=enabled / disabled</p>
+              <p>· temperature / top_p / max_tokens belum diterapkan oleh backend, sehingga tidak disediakan</p>
             </div>
           </CardContent>
         </Card>
@@ -310,23 +310,23 @@ export default function PlaygroundPage() {
                   handleSend()
                 }
               }}
-              placeholder="输入消息，回车发送，Shift+回车换行…"
+              placeholder="Ketik pesan, tekan Enter untuk mengirim, Shift+Enter untuk baris baru…"
               disabled={busy || !model}
               className="flex-1"
             />
             {busy ? (
-              <Button variant="destructive" onClick={handleStop} aria-label="停止">
+              <Button variant="destructive" onClick={handleStop} aria-label="Hentikan">
                 <Square className="h-4 w-4" />
               </Button>
             ) : (
               <Button onClick={handleSend} disabled={!input.trim() || !model}>
                 <Send className="h-4 w-4" />
-                发送
+                Kirim
               </Button>
             )}
           </div>
           <div className="border-t px-3 py-1.5 text-[11px] text-muted-foreground">
-            Enter 发送 · Shift+Enter 换行 · 模型与参数见左侧
+            Enter untuk mengirim · Shift+Enter untuk baris baru · Model dan parameter ada di sebelah kiri
           </div>
         </Card>
       </div>
@@ -335,13 +335,13 @@ export default function PlaygroundPage() {
       <AlertDialog open={clearOpen} onOpenChange={setClearOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>清空所有对话？</AlertDialogTitle>
-            <AlertDialogDescription>此操作将删除当前会话中的所有消息，不可恢复。</AlertDialogDescription>
+            <AlertDialogTitle>Hapus semua percakapan?</AlertDialogTitle>
+            <AlertDialogDescription>Tindakan ini akan menghapus semua pesan dalam sesi saat ini dan tidak dapat dibatalkan.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>取消</AlertDialogCancel>
+            <AlertDialogCancel>Batal</AlertDialogCancel>
             <AlertDialogAction onClick={handleClear} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
-              确认清空
+              Konfirmasi penghapusan
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
